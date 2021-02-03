@@ -6,17 +6,17 @@
 
         <div class="bg-light border-secondary col-8 mx-auto shadow rounded p-4">
 
-            <form action="/modificarRegion" method="post">
+            <form action="/modifyRegion" method="post">
             @csrf
                 Region: <br>
-                <input type="text" name="regNombre"
+                <input type="text" name="regName"
                        class="form-control"
-                       value="{{ $region->regNombre }}">
+                       value="{{ $region->regName }}">
                 <input type="hidden" name="regID"
                        value="{{ $region->regID  }}">
                 <br>
-                <button class="btn btn-dark">Modificar</button>
-                <a href="/adminRegiones" class="btn btn-outline-secondary ml-3">
+                <button class="btn btn-dark">Modify</button>
+                <a href="/adminRegions" class="btn btn-outline-secondary ml-3">
                     Back to panel
                 </a>
             </form>

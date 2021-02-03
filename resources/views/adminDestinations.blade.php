@@ -15,25 +15,25 @@
             <th>Region</th>
             <th>Price</th>
             <th colspan="2">
-                <a href="/agregarDestino" class="btn btn-outline-secondary">
+                <a href="/addDestination" class="btn btn-outline-secondary">
                     Add
                 </a>
             </th>
         </tr>
         </thead>
         <tbody>
-        @foreach ( $destinos as $destino )
+        @foreach ( $destinations as $destination )
             <tr>
-                <td>{{ $destino->destNombre }}</td>
-                <td>{{ $destino->regNombre }}</td>
-                <td>${{ $destino->destPrecio }}</td>
+                <td>{{ $destination->destName }}</td>
+                <td>{{ $destination->regName }}</td>
+                <td>${{ $destination->destPrice }}</td>
                 <td>
-                    <a href="/modificarDestino/{{ $destino->destID }}" class="btn btn-outline-secondary">
+                    <a href="/modifyDestination/{{ $destination->destID }}" class="btn btn-outline-secondary">
                         Modify
                     </a>
                 </td>
                 <td>
-                    <a href="/eliminarDestino/{{ $destino->destID }}" class="btn btn-outline-secondary">
+                    <a href="/deleteDestination/{{ $destination->destID }}" class="btn btn-outline-secondary">
                         Delete
                     </a>
                 </td>

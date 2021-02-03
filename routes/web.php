@@ -12,97 +12,98 @@
 */
 
 #################################################
-#####    CRUD DE REGIONES
+#####    CRUD OF REGIONS
 
 // LISTING REGIONS
-Route::get('/adminRegiones', function(){
+Route::get('/adminRegions', function(){
     // RAW SQL
-//    $regiones = DB::select(
-//                    "SELECT regID, regNombre FROM regiones"
+//    $regions = DB::select(
+//                    "SELECT regID, regName FROM regions"
 //                );
-    $regiones = DB::table('regiones')->get();
-    return view('adminRegiones',
-                ['regiones' => $regiones]
+    $regions = DB::table('regions')->get();
+    return view('adminRegions',
+                ['regions' => $regions]
         );
 });
 
-Route::post('/agregarRegion', function(){
+Route::post('/addRegion', function(){
     //CAPTURE THE DATA FROM THE FORM
-    $regNombre = $_POST['regNombre'];
+    $regName = $_POST['regName'];
     // RAW SQL
 //    DB::insert(
-//        "INSERT INTO regiones(regNombre) VALUE (:regNombre)",
-//            [$regNombre]
+//        "INSERT INTO regions(regName) VALUE (:regName)",
+//            [$regName]
 //    );
     // QUERY BUILDER
-      DB::table('regiones')->insert(['regNombre'=>$regNombre]);
-      return redirect('adminRegiones')
-            ->with('mensaje', 'Region: ' .$regNombre. ' added successfully.');
+      DB::table('regions')->insert(['regName'=>$regName]);
+      return redirect('adminRegions')
+            ->with('mensaje', 'Region: ' .$regName. ' added successfully.');
 });
 
 Route::get('/agragarRegion', function(){
-    return view('agregarRegion');
+    return view('addRegion');
 });
 
-Route::get('/modificarRegion/{regID}', function($regID){
+Route::get('/modifyRegion/{regID}', function($regID){
     // RAW SQL
-    // $region = DB::select('SELECT * FROM regiones WHERE regID = :regID', [$regID]);
+    // $region = DB::select('SELECT * FROM regions WHERE regID = :regID', [$regID]);
     // QUERY BUILDER
-    $region = DB::table('regiones')
+    $region = DB::table('regions')
                     ->where('regID', $regID)
                     ->first();
-    return view('modificarRegion' , [ 'region'=>$region ]);
+    return view('modifyRegion' , [ 'region'=>$region ]);
 });
 
-Route::post('/modificarRegion', function(){
+Route::post('/modifyRegion', function(){
     //CAPTURE THE DATA FROM THE FORM
     $regID = $_POST['regID'];
-    $regNombre = $_POST['regNombre'];
+    $regName = $_POST['regName'];
     // RAW SQL
-//    DB::update( 'UPDATE regiones
-//                    SET regNombre = ?
-//                    WHERE regID = ?', [ $regNombre, $regID ] );
+//    DB::update( 'UPDATE regions
+//                    SET regName = ?
+//                    WHERE regID = ?', [ $regName, $regID ] );
     // QUERY BUILDER
-    DB::table('regiones')
+    DB::table('regions')
           ->where('regID', $regID)
           ->update([
-                  'regNombre'=>$regNombre
+                  'regName'=>$regName
               ]);
-        return redirect('adminRegiones')
-                    ->with('mensaje', 'Region: '.$regNombre.
-                        ' modificada correctamente.');
+        return redirect('adminRegions')
+                    ->with('mensaje', 'Region: '.$regName.
+                        ' modified successfully.');
 });
 
-Route::get('eliminarRegion/{regID}/{param?}', function($regID, $param=null){
-    $region = DB::table('regiones')
+Route::get('deleteRegion/{regID}/{param?}', function($regID, $param=null){
+    $region = DB::table('regions')
                     ->where('regID', $regID)
                     ->first();
-    return view('eliminarRegion',
+    return view('deleteRegion',
                 [
                     'region'=>$region
-                ]);
+                ]
+        );
 });
 
-Route::post('/eliminarRegion', function(){
+Route::post('/deleteRegion', function(){
     $regID = $_POST['regID'];
-    $regNombre = $_POST['regNombre'];
+    $regName = $_POST['regName'];
     // EXISTS
-     if(DB::table('destinos')->where('regID', $regID)->exists()){
-          return redirect('/adminRegiones')
+     if(DB::table('destinations')->where('regID', $regID)->exists()){
+          return redirect('/adminRegions')
                      ->with(
                         [
-                            'mensaje'=>'The region '.$regNombre.' cannot be removed because has a assigned destination.'
+                            'mensaje'=>'The region '.$regName.' cannot be removed because has a assigned destination.'
                         ]
                     );
     };
 
-    DB::table('regiones')
+    DB::table('regions')
             ->where('regID', '=',$regID)
             ->delete();
-    return redirect('/adminRegiones')
+    return redirect('/adminRegions')
                 ->with(
                     [
-                        'mensaje'=>'The region '.$regNombre.' was deleted successfully.'
+                        'mensaje'=>'The region '.$regName.' was deleted successfully.'
                     ]
                 );
 });
@@ -110,135 +111,135 @@ Route::post('/eliminarRegion', function(){
 
 
 #################################################
-#####    CRUD DE DESTINOS
+#####    CRUD OF DESTINATIONS
 
 // LISTING DESTINATIONS
 
-Route::get('/adminDestinos', function(){
+Route::get('/adminDestinations', function(){
 //   ---- RAW SQL ------
-//    $destinos = DB::select(
+//    $destinations = DB::select(
 //        // TABLE RELATION
 ////        "SELECT
-////            destID, destNombre,
-////            d.regID, r.regNombre,
-////            destPrecio
+////            destID, destName,
+////            d.regID, r.regName,
+////            destPrice
 ////        FROM
-////            destinos d, regiones r
+////            destinations d, regions r
 ////        WHERE d.regID = r.regID"
 //        // JOIN TECHNIQUE
 //        "SELECT
-//            destID, destNombre,
-//            d.regID, r.regNombre,
-//            destPrecio
+//            destID, destName,
+//            d.regID, r.regName,
+//            destPrice
 //        FROM
-//            destinos d
+//            destinations d
 //        JOIN
-//            regiones r
+//            regions r
 //        ON
 //            d.regID = r.regID"
 //    );
 //   ---- QUERY BUILDER ------
-    $destinos = DB::table('destinos as d')
-                ->join('regiones as r', 'd.regID', '=', 'r.regID')
+    $destinations = DB::table('destinations as d')
+                ->join('regions as r', 'd.regID', '=', 'r.regID')
                 ->get();
-    return view('adminDestinos',
-            ['destinos' => $destinos]
+    return view('adminDestinations',
+            ['destinations' => $destinations]
         );
 });
 
-Route::get('/agregarDestino', function(){
+Route::get('/addDestination', function(){
     // QUERY FOR SELECT INPUT
-    $regiones = DB::table('regiones')->get();
-    return view('agregarDestino',
-            [ 'regiones'=>$regiones ]
+    $regions = DB::table('regions')->get();
+    return view('addDestination',
+            [ 'regions'=>$regions ]
         );
 });
 
-Route::post('/agregarDestino', function(){
+Route::post('/addDestination', function(){
     //CAPTURE THE DATA FROM THE FORM
-    $destNombre = $_POST['destNombre'];
+    $destName = $_POST['destName'];
     $regID = $_POST['regID'];
-    $destPrecio= $_POST['destPrecio'];
-    $destAsientos = $_POST['destAsientos'];
-    $destDisponibles = $_POST['destDisponibles'];
+    $destPrice= $_POST['destPrice'];
+    $destSeats = $_POST['destSeats'];
+    $destAvailable = $_POST['destAvailable'];
 
     //INSERT DATA IN DESTINATION TABLE
-    DB::table('destinos')->insert(
+    DB::table('destinations')->insert(
                 [
-                    'destNombre'=>$destNombre,
+                    'destName'=>$destName,
                     'regID'=>$regID,
-                    'destPrecio'=>$destPrecio,
-                    'destAsientos'=>$destAsientos,
-                    'destDisponibles'=>$destDisponibles
+                    'destPrice'=>$destPrice,
+                    'destSeats'=>$destSeats,
+                    'destAvailable'=>$destAvailable
                 ]
     );
 
     // REDIRECT Y MESSAGE
-    return redirect('adminDestinos')->with(
+    return redirect('adminDestinations')->with(
                             [
-                                'mensaje'=>'Destination: ' .$destNombre. ' added successfully'
+                                'mensaje'=>'Destination: ' .$destName. ' added successfully'
                             ]
     );
 });
 
-Route::get('/modificarDestino/{destID}', function($destID){
-    $destino = DB::table('destinos as d')
-                    ->join('regiones as r', 'd.regID', '=', 'r.regID')
+Route::get('/modifyDestination/{destID}', function($destID){
+    $destination = DB::table('destinations as d')
+                    ->join('regions as r', 'd.regID', '=', 'r.regID')
                     ->where('destID', $destID)
                     ->first();
-    $regiones = DB::table('regiones')->get();
-    return view('modificarDestino',
+    $regions = DB::table('regions')->get();
+    return view('modifyDestination',
                         [
-                            'destino'=>$destino,
-                            'regiones'=>$regiones
+                            'destination'=>$destination,
+                            'regions'=>$regions
                         ]);
 });
 
 
-Route::post('/modificarDestino', function(){
+Route::post('/modifyDestination', function(){
     // WE CAPTURE DATA FROM THE FORM
     $destID = $_POST['destID'];
-    $destNombre = $_POST['destNombre'];
-    $destPrecio = $_POST['destPrecio'];
-    $destAsientos = $_POST['destAsientos'];
-    $destDisponibles = $_POST['destDisponibles'];
+    $destName = $_POST['destName'];
+    $destPrice = $_POST['destPrice'];
+    $destSeats = $_POST['destSeats'];
+    $destAvailable = $_POST['destAvailable'];
     $regID = $_POST['regID'];
 
-    DB::table('destinos')
+    DB::table('destinations')
         ->where('destID', $destID)
         ->update([
-            'destNombre' => $destNombre,
-            'destPrecio' => $destPrecio,
-            'destAsientos' => $destAsientos,
-            'destDisponibles' => $destDisponibles,
+            'destName' => $destName,
+            'destPrice' => $destPrice,
+            'destSeats' => $destSeats,
+            'destAvailable' => $destAvailable,
             'regID' => $regID
         ]);
-    return redirect('adminDestinos')
-        ->with('mensaje', 'Destino: '.$destNombre.
-            ' modificado correctamente.');
+    return redirect('adminDestinations')
+        ->with('mensaje', 'Destination: '.$destName.
+            ' modified successfully.');
 });
 
-Route::get('eliminarDestino/{destID}', function($destID){
-    $destino = DB::table('destinos')
+Route::get('deleteDestination/{destID}', function($destID){
+    $destination = DB::table('destinations')
         ->where('destID', $destID)
         ->first();
-    return view('eliminarDestino',
+    return view('deleteDestination',
         [
-            'destino'=>$destino
+            'destination'=>$destination
         ]);
 });
 
-Route::post('/eliminarDestino', function(){
+Route::post('/deleteDestination', function(){
     $destID = $_POST['destID'];
-    $destNombre = $_POST['destNombre'];
+    $destName = $_POST['destName'];
 
-    DB::table('destinos')
+    DB::table('destinations')
         ->where('destID', '=', $destID)
         ->delete();
-    return redirect('/adminDestinos')
+    return redirect('/adminDestinations')
         ->with(
             [
-                'mensaje'=>'The destination '.$destNombre.' was deleted successfully.'
+                'mensaje'=>'The destination '.$destName.' was deleted successfully.'
             ]
         );
 });

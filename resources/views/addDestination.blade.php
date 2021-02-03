@@ -5,30 +5,30 @@
 
         <div class="bg-light border-secondary col-8 mx-auto shadow rounded p-4">
 
-        <form action="/agregarDestino" method="post">
+        <form action="/addDestination" method="post">
         @csrf
             Name: <br>
-            <input type="text" name="destNombre" class="form-control" required>
+            <input type="text" name="destName" class="form-control" required>
             <br>
             Region: <br>
             <select name="regID" class="form-control" required>
                 <option value="">Select a Region</option>
-            @foreach( $regiones as $region )
-                <option value="{{ $region->regID }}">{{ $region->regNombre }}</option>
+            @foreach( $regions as $region )
+                <option value="{{ $region->regID }}">{{ $region->regName }}</option>
             @endforeach
             </select>
             <br>
             Price: <br>
-            <input type="number" name="destPrecio" class="form-control" required>
+            <input type="number" name="destPrice" class="form-control" required>
             <br>
             Total Seats: <br>
-            <input type="number" name="destAsientos" class="form-control" required>
+            <input type="number" name="destSeats" class="form-control" required>
             <br>
             Available Seats: <br>
-            <input type="number" name="destDisponibles" class="form-control" required>
+            <input type="number" name="destAvailable" class="form-control" required>
             <br>
             <button class="btn btn-dark">Add</button>
-            <a href="/adminDestinos" class="btn btn-outline-secondary ml-3">
+            <a href="/adminDestinations" class="btn btn-outline-secondary ml-3">
                  Back to panel
             </a>
         </form>

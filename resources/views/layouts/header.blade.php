@@ -25,8 +25,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link" href="/adminRegiones">Regions</a>
-                    <a class="nav-item nav-link" href="/adminDestinos">Destinations</a>
+                    <a class="nav-item nav-link" href="/adminRegions">Regions</a>
+                    <a class="nav-item nav-link" href="/adminDestinations">Destinations</a>
                 </div>
             </div>
         </nav>

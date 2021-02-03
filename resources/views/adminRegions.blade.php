@@ -24,17 +24,17 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($regiones as $region)
+            @foreach($regions as $region)
                 <tr>
                     <td>{{$region->regID}}</td>
-                    <td>{{$region->regNombre}}</td>
+                    <td>{{$region->regName}}</td>
                     <td>
-                        <a href="/modificarRegion/{{$region->regID}}" class="btn btn-outline-secondary">
+                        <a href="/modifyRegion/{{$region->regID}}" class="btn btn-outline-secondary">
                             Modify
                         </a>
                     </td>
                     <td>
-                        <a href="eliminarRegion/{{$region->regID}}" class="btn btn-outline-secondary">
+                        <a href="deleteRegion/{{$region->regID}}" class="btn btn-outline-secondary">
                             Delete
                         </a>
                     </td>

@@ -5,15 +5,15 @@
 
         <div class="bg-light col-6 mx-auto shadow rounded p-4 text-danger">
             The following destination will be deleted:
-            <span class="lead">{{$destino->destNombre}}</span>
-            <form action="/eliminarDestino" method="post">
+            <span class="lead">{{$destination->destName}}</span>
+            <form action="/deleteDestination" method="post">
                 @csrf
-                <input type="hidden" name="destID" value="{{$destino->destID}}">
-                <input type="hidden" name="destNombre" value="{{$destino->destNombre}}">
+                <input type="hidden" name="destID" value="{{$destination->destID}}">
+                <input type="hidden" name="destName" value="{{$destination->destName}}">
                 <button class="btn btn-danger btn-block mt-2">
                     Confirm
                 </button>
-                <a href="/adminDestinos" class="btn btn-warning btn-block mt-2">
+                <a href="/adminDestinations" class="btn btn-warning btn-block mt-2">
                     Back to panel
                 </a>
             </form>
