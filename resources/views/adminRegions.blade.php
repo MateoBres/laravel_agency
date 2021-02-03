@@ -1,6 +1,6 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
 
-    @section('contenido')
+    @section('content')
         <h1>Regions management panel</h1>
 
         @if(session('mensaje'))

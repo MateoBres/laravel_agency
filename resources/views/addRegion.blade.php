@@ -1,6 +1,6 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
 
-    @section('contenido')
+    @section('content')
 
         <h1>Registration of a new region</h1>
 

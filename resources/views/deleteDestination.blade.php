@@ -1,6 +1,6 @@
-@extends('layouts.plantilla')
+@extends('layouts.layout')
 
-    @section('contenido')
+    @section('content')
         <h1>Delete a destination</h1>
 
         <div class="bg-light col-6 mx-auto shadow rounded p-4 text-danger">

@@ -1,5 +1,5 @@
-@extends('layouts.plantilla')
-    @section('contenido')
+@extends('layouts.layout')
+    @section('content')
 
         <h1>Modification of a destination</h1>
 

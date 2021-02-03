@@ -19,8 +19,8 @@
 
     </header>
     <main>
-        <h1>Plantilla de prueba</h1>
-        @yield('contenido')
+        <h1>Test Layout</h1>
+        @yield('content')
     </main>
     <footer>
 

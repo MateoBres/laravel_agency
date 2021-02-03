@@ -1,5 +1,5 @@
-@extends('layouts.plantilla')
-@section('contenido')
+@extends('layouts.layout')
+@section('content')
     <h1>Destination management panel</h1>
 
     @if (session('mensaje'))
