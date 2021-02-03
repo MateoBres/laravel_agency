@@ -37,7 +37,7 @@ Route::post('/addRegion', function(){
     // QUERY BUILDER
       DB::table('regions')->insert(['regName'=>$regName]);
       return redirect('adminRegions')
-            ->with('mensaje', 'Region: ' .$regName. ' added successfully.');
+            ->with('mensage', 'Region: ' .$regName. ' added successfully.');
 });
 
 Route::get('/agragarRegion', function(){
@@ -69,7 +69,7 @@ Route::post('/modifyRegion', function(){
                   'regName'=>$regName
               ]);
         return redirect('adminRegions')
-                    ->with('mensaje', 'Region: '.$regName.
+                    ->with('mensage', 'Region: '.$regName.
                         ' modified successfully.');
 });
 
@@ -92,7 +92,7 @@ Route::post('/deleteRegion', function(){
           return redirect('/adminRegions')
                      ->with(
                         [
-                            'mensaje'=>'The region '.$regName.' cannot be removed because has a assigned destination.'
+                            'mensage'=>'The region '.$regName.' cannot be removed because has a assigned destination.'
                         ]
                     );
     };
@@ -103,7 +103,7 @@ Route::post('/deleteRegion', function(){
     return redirect('/adminRegions')
                 ->with(
                     [
-                        'mensaje'=>'The region '.$regName.' was deleted successfully.'
+                        'mensage'=>'The region '.$regName.' was deleted successfully.'
                     ]
                 );
 });
@@ -177,7 +177,7 @@ Route::post('/addDestination', function(){
     // REDIRECT Y MESSAGE
     return redirect('adminDestinations')->with(
                             [
-                                'mensaje'=>'Destination: ' .$destName. ' added successfully'
+                                'mensage'=>'Destination: ' .$destName. ' added successfully'
                             ]
     );
 });
@@ -215,7 +215,7 @@ Route::post('/modifyDestination', function(){
             'regID' => $regID
         ]);
     return redirect('adminDestinations')
-        ->with('mensaje', 'Destination: '.$destName.
+        ->with('mensage', 'Destination: '.$destName.
             ' modified successfully.');
 });
 
@@ -239,7 +239,7 @@ Route::post('/deleteDestination', function(){
     return redirect('/adminDestinations')
         ->with(
             [
-                'mensaje'=>'The destination '.$destName.' was deleted successfully.'
+                'mensage'=>'The destination '.$destName.' was deleted successfully.'
             ]
         );
 });

@@ -2,9 +2,9 @@
 @section('content')
     <h1>Destination management panel</h1>
 
-    @if (session('mensaje'))
+    @if (session('mensage'))
         <div class="alert alert-success">
-            {{ session('mensaje') }}
+            {{ session('mensage') }}
         </div>
     @endif
 

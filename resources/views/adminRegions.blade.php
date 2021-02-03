@@ -3,10 +3,10 @@
     @section('content')
         <h1>Regions management panel</h1>
 
-        @if(session('mensaje'))
+        @if(session('mensage'))
 
             <div class="alert alert-success p-2">
-                {{session('mensaje')}}
+                {{session('mensage')}}
             </div>
 
         @endif
